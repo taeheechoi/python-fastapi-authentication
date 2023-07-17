@@ -13,3 +13,7 @@ p2 = Point(1, 2)
 print(p1)  # Output: Point(x=1, y=2)
 print(p1 == p2)  # Output: True
 ```
+
+
+### Reference
+- https://medium.com/python-in-plain-english/building-a-restful-api-with-fastapi-secure-signup-and-login-functionality-included-45cdbcb36106

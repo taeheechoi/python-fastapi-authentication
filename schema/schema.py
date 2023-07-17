@@ -41,7 +41,7 @@ class ResUpdateUser(BaseModel):
     id: int
     fullname: str
     email: str
-    password: str
+    # password: str
     role: Role
     date: str
     time: str
