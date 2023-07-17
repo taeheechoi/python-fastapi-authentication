@@ -1,8 +1,10 @@
-import httpx
-from fastapi import HTTPException, status
-from config.config import settings
-from argon2 import PasswordHasher
 import argon2.exceptions
+import httpx
+from argon2 import PasswordHasher
+from fastapi import HTTPException, status
+
+from auth.auth import decode_jwt
+from config.config import settings
 
 ph = PasswordHasher()
 
@@ -38,3 +40,10 @@ async def get_calories_from_api():
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Failed to retrieve calories')
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+async def get_user_from_token(token: str):
+    user_from_token = decode_jwt(token)
+    
+    if not user_from_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
+    return user_from_token
