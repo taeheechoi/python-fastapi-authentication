@@ -14,9 +14,6 @@ class Settings(BaseSettings):
     JWT_ALGORITHM:str
     PORT: str
     
-    class Config:
-        env_file = ".env"
-
 
 @lru_cache()
 def get_settings():

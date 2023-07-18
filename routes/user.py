@@ -26,8 +26,8 @@ async def create_a_user(user: NewUser):
             email = user.email,
             password = hashed_password,
             role = user.role,
-            date=datetime.now().strftime("%Y-%m-%d"),
-            time=datetime.now().strftime("%H:%M:%S"),
+            date=datetime.now().strftime('%Y-%m-%d'),
+            time=datetime.now().strftime('%H:%M:%S'),
         )
 
         db_item = db.query(User).filter(User.email == new_user.email).first()
@@ -82,7 +82,7 @@ async def get_users(
         elif role == Role.USER:
             user_entries = db.query(User).filter(User.email == user_email).first()
         else:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient privileges")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Insufficient privileges')
 
         return user_entries
     except SQLAlchemyError:
@@ -105,7 +105,7 @@ async def update_user_details(
         print(user_entry_to_update)
 
         if user_entry_to_update is None:
-            raise HTTPException(status_code=400, detail=f"User with the id {user_id} was not found")
+            raise HTTPException(status_code=400, detail=f'User with the id {user_id} was not found')
 
         if (
             role == Role.ADMIN
@@ -118,14 +118,14 @@ async def update_user_details(
             user_entry_to_update.fullname = new_entry.fullname
             user_entry_to_update.email = new_entry.email
             user_entry_to_update.password = hashed_password
-            user_entry_to_update.date = datetime.now().strftime("%Y-%m-%d")
-            user_entry_to_update.time = datetime.now().strftime("%H:%M:%S")
+            user_entry_to_update.date = datetime.now().strftime('%Y-%m-%d')
+            user_entry_to_update.time = datetime.now().strftime('%H:%M:%S')
             user_entry_to_update.role = new_entry.role
 
             db.commit()
 
         else:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient privileges")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Insufficient privileges')
 
         return user_entry_to_update
 
@@ -145,7 +145,7 @@ async def delete_user_detail(
         user_entry_to_delete = db.query(User).filter(User.id == user_id).first()
 
         if user_entry_to_delete is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with the id {user_id} was not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with the id {user_id} was not found')
 
         if (
             role == Role.ADMIN
@@ -156,11 +156,11 @@ async def delete_user_detail(
             db.commit()
 
         else:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient privileges")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Insufficient privileges')
 
         return DeletionSuccess()
 
     except SQLAlchemyError:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="User deletion was not successful")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail='User deletion was not successful')
 
 user_routes = router

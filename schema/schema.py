@@ -22,7 +22,7 @@ class NewUser(BaseModel):
     role: Role
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ResUser(BaseModel):
@@ -34,7 +34,7 @@ class ResUser(BaseModel):
     time: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ResUpdateUser(BaseModel):
@@ -47,21 +47,21 @@ class ResUpdateUser(BaseModel):
     time: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Login(BaseModel):
     email: str
     password: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class NewEntry(BaseModel):
     text: str
     number_of_calories: Optional[int]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ResEntry(BaseModel):
     id: int
@@ -73,7 +73,7 @@ class ResEntry(BaseModel):
     user: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DeletionSuccess(BaseModel):
     status: str = 'Success'
