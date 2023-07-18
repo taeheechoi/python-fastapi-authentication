@@ -70,11 +70,11 @@ class ResEntry(BaseModel):
     text: str
     time: str
     is_under_calories: bool
-    user: str
+    user: int
 
     class Config:
         from_attributes = True
 
 class DeletionSuccess(BaseModel):
     status: str = 'Success'
-    message: str = 'User deleted successfully'
+    message: str = 'Deleted successfully'

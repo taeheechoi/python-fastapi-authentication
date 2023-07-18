@@ -60,6 +60,8 @@ async def login_a_user(login: Login):
                 return token
             else:
                 raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='You have entered a wrong password.')
+        else:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='User not found in the database.')
     except SQLAlchemyError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='User not found in the database.')
     

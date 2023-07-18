@@ -35,6 +35,7 @@ async def get_calories_from_api():
             data = response.json()
             foods = data.get('foods', [])
             if foods:
+                print(foods)
                 return foods[0].get('nf_calories', 0)
             else:
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Failed to retrieve calories')
